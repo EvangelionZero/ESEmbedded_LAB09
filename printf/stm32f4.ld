@@ -14,7 +14,18 @@ SECTIONS
         *(.rodata)
         *(.rodata.*)
     } > FLASH
-	
+
+    .eh_frame :
+    {
+        *(.eh_frame)
+    } > FLASH
+
+    .ARM.exidx :
+    {
+        *(.ARM.exidx)
+        _mydata_lma_start = .; /* LMA is equivalent to VMA in this section */
+    } > FLASH
+
     .mydata : AT(_mydata_lma_start) /* tell linker whrere (LMA) this section should be put at */
     {
         _mydata_vma_start = .;
